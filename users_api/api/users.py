@@ -11,6 +11,7 @@ from users_api.schemas.users import UsersResponse
 
 from users_api.managers.users import users_manager
 from users_api.models.orm.users import UsersORM
+from users_api.models.
 
 
 users_router = UsersRouter()
@@ -21,9 +22,7 @@ async def get_users(db_session: Session = Depends(get_db)) -> UsersResponse:
     try:
         users = users_manager.get_multi(db_session=db_session)
 
-        return UsersResponse(
-            users=[User.model_validate(user) for user in users]
-        )
+        return UsersResponse(users=[User.model_validate(user) for user in users])
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e)) from e
@@ -68,9 +67,7 @@ async def delete_user(
         db_session.delete(user)
         db_session.commit()
 
-        return DeleteUserResponse(
-            status=f"Successfully deleted user: {user_id}"
-        )
+        return DeleteUserResponse(status=f"Successfully deleted user: {user_id}")
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e)) from e

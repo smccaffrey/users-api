@@ -1,8 +1,10 @@
+import datetime
+from uuid import UUID
+
 from typing import Optional
 from pydantic import BaseModel
 
-from uuid import UUID
-import datetime
+
 
 class User(BaseModel):
     id: Optional[UUID]
