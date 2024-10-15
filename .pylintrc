@@ -1,0 +1,4 @@
+[messages control]
+disable=
+    missing-docstring,
+    invalid-name
