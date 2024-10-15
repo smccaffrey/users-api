@@ -2,3 +2,4 @@
 disable=
     missing-docstring,
     invalid-name
+    import-error
