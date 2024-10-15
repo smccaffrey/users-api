@@ -70,7 +70,8 @@ async def post_user(
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+
 @users_router.delete("/{user_id}")
 async def delete_user(
     user_id: UUID,
