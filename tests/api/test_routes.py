@@ -3,11 +3,8 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from users_api.api.deps.db import get_db
-from users_api.app import app  # Adjust the import according to your project structure
+from users_api.app import app
 from users_api.models.orm.users import UsersORM
-from users_api.schemas.users import CreateUsersRequest
-
-# client = TestClient(app)
 
 TEST_AUTH_HEADERS = {
     "Authorization": "Bearer test_token"
@@ -47,14 +44,16 @@ def test_get_user(client: TestClient, db_session: Session) -> None:
     db_session.add(UsersORM(id=user_id, name="Test User", email="test@example.com"))
     db_session.commit()
 
-    response = client.get(f"/users/{user_id}", headers=TEST_AUTH_HEADERS)
+    response = client.get(
+        f"/users/{user_id}", headers=TEST_AUTH_HEADERS
+    )
     assert response.status_code == 200
     data = response.json()
     assert data["users"][0]["id"] == str(user_id)
     assert data["users"][0]["email"] == "test@example.com"
 
 
-def test_post_user(client: TestClient, db_session: Session) -> None:
+def test_post_user(client: TestClient) -> None:
     # Prepare the request body
     request_body = {
         # "name": "New User",

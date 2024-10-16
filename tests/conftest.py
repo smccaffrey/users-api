@@ -9,14 +9,12 @@ from users_api.app import app  # Adjust to your actual app import
 from users_api.api.deps.db import get_db
 from users_api.models.base import Base  # Your SQLAlchemy Base class
 
-# Create a test database engine (using SQLite in-memory for testing purposes)
+from sqlalchemy.orm import Session
+
 # SQLALCHEMY_DATABASE_URL = "postgresql:///./test.db"
 engine = create_engine(
     settings.TEST_DATABASE_URL,
-    # SQLALCHEMY_DATABASE_URL,
-    # connect_args={"check_same_thread": False}
 )
-print(engine)
 
 # Create a sessionmaker for the test database
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -40,7 +38,7 @@ def db_session():
 
 
 @pytest.fixture(scope="module")
-def client(db_session):
+def client(db_session: Session):
     """Fixture to create a TestClient for the FastAPI app with a mock DB session."""
 
     # Override the dependency to use the test DB session
