@@ -4,12 +4,13 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session
+
 from users_api import settings
 from users_api.app import app  # Adjust to your actual app import
 from users_api.api.deps.db import get_db
 from users_api.models.base import Base  # Your SQLAlchemy Base class
 
-from sqlalchemy.orm import Session
 
 # SQLALCHEMY_DATABASE_URL = "postgresql:///./test.db"
 engine = create_engine(
