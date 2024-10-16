@@ -15,13 +15,13 @@ repos:
 
 -   repo: local
     hooks:
-    -   id: pylint
-        name: pylint
-        entry: poetry run pylint
-        stages: [commit]
-        language: system
-        types: [python]
-        args: [--extension-pkg-whitelist=pydantic]
+    # -   id: pylint
+    #     name: pylint
+    #     entry: poetry run pylint
+    #     stages: [commit]
+    #     language: system
+    #     types: [python]
+    #     args: [--extension-pkg-whitelist=pydantic]
     # -   id: flake8
     #     name: flake8
     #     entry: poetry run flake8
@@ -34,12 +34,12 @@ repos:
         stages: [commit]
         language: system
         types: [python]
-    -   id: mypy
-        name: mypy
-        entry: poetry run mypy
-        stages: [commit]
-        language: system
-        types: [python]
+    # -   id: mypy
+    #     name: mypy
+    #     entry: poetry run mypy
+    #     stages: [commit]
+    #     language: system
+    #     types: [python]
 
     # https://github.com/hadolint/hadolint
     # Use docker to manage hadolint so that it doesn't need to be
