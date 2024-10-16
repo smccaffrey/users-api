@@ -89,6 +89,13 @@ Downgrade DB
 make db-down
 ```
 
+## Testing
+Run test suite
+```
+make tests
+```
+*Runs this command `poetry run pytest tests/`*
+
 ## Docker
 
 Build
