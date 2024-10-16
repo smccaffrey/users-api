@@ -84,3 +84,7 @@ alembic-migration:
 .PHONY: undo-alembic-migration
 undo-alembic-migration:
 	poetry run alembic downgrade -1
+
+.PHONY: tests
+tests:
+	poetry run pytest tests/

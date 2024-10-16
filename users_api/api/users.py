@@ -33,6 +33,11 @@ async def get_user(
     try:
         user = users_manager.get(db_session=db_session, id=user_id)
 
+        if not user:
+            return UsersResponse(
+                message=f"User {user_id} not found."
+            )
+        
         return UsersResponse(users=[User.model_validate(user)])
 
     except Exception as e:

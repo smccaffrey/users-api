@@ -9,7 +9,8 @@ class UsersRequest(BaseModel):
 
 
 class UsersResponse(BaseModel):
-    users: List[User]
+    users: Optional[List[User]] = None
+    message: Optional[str] = None
 
 
 class CreateUsersRequest(BaseModel):
