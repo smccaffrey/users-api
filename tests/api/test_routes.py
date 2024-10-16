@@ -44,9 +44,7 @@ def test_get_user(client: TestClient, db_session: Session) -> None:
     db_session.add(UsersORM(id=user_id, name="Test User", email="test@example.com"))
     db_session.commit()
 
-    response = client.get(
-        f"/users/{user_id}", headers=TEST_AUTH_HEADERS
-    )
+    response = client.get(f"/users/{user_id}", headers=TEST_AUTH_HEADERS)
     assert response.status_code == 200
     data = response.json()
     assert data["users"][0]["id"] == str(user_id)
