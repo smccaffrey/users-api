@@ -17,5 +17,6 @@ class CreateUsersRequest(BaseModel):
     email: Optional[str]
     sms: Optional[str]
 
+
 class DeleteUserResponse(BaseModel):
     status: str

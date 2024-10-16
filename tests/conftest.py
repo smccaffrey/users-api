@@ -13,7 +13,7 @@ from users_api.models.base import Base  # Your SQLAlchemy Base class
 # SQLALCHEMY_DATABASE_URL = "postgresql:///./test.db"
 engine = create_engine(
     settings.TEST_DATABASE_URL,
-    # SQLALCHEMY_DATABASE_URL, 
+    # SQLALCHEMY_DATABASE_URL,
     # connect_args={"check_same_thread": False}
 )
 print(engine)
@@ -23,6 +23,7 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 
 # Set up the test database
 Base.metadata.create_all(bind=engine)
+
 
 @pytest.fixture(scope="module")
 def db_session():
@@ -37,10 +38,11 @@ def db_session():
     transaction.rollback()
     connection.close()
 
+
 @pytest.fixture(scope="module")
 def client(db_session):
     """Fixture to create a TestClient for the FastAPI app with a mock DB session."""
-    
+
     # Override the dependency to use the test DB session
     def override_get_db():
         try:
@@ -49,6 +51,6 @@ def client(db_session):
             db_session.close()
 
     app.dependency_overrides[get_db] = override_get_db
-    
+
     with TestClient(app) as test_client:
         yield test_client

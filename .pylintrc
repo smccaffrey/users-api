@@ -1,5 +1,5 @@
 [messages control]
 disable=
     missing-docstring,
-    invalid-name
+    invalid-name,
     import-error

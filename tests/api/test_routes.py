@@ -9,7 +9,9 @@ from users_api.schemas.users import CreateUsersRequest
 
 # client = TestClient(app)
 
-TEST_AUTH_HEADERS = {"Authorization": "Bearer test_token"}  # Adjust as per your auth mechanism
+TEST_AUTH_HEADERS = {
+    "Authorization": "Bearer test_token"
+}  # Adjust as per your auth mechanism
 
 
 # Mock database dependency
@@ -20,12 +22,15 @@ def override_get_db():
     finally:
         db.close()
 
+
 app.dependency_overrides[get_db] = override_get_db
 
 
 def test_get_users(client: TestClient, db_session: Session) -> None:
     # Setup mock data in the db_session
-    db_session.add(UsersORM(id=uuid.uuid4(), name="Test User", email="test@example.com"))
+    db_session.add(
+        UsersORM(id=uuid.uuid4(), name="Test User", email="test@example.com")
+    )
     db_session.commit()
 
     # Test the /users/ route
@@ -54,7 +59,7 @@ def test_post_user(client: TestClient, db_session: Session) -> None:
     request_body = {
         # "name": "New User",
         "email": "newuser@example.com",
-        "sms": "1234567890"
+        "sms": "1234567890",
     }
 
     # Test the /users/ POST route
