@@ -14,6 +14,4 @@ class User(BaseModel):
     created_at: Optional[datetime.datetime]
     last_updated: Optional[datetime.datetime]
 
-    model_config = {
-        "from_attributes": True
-    }
+    model_config = {"from_attributes": True}

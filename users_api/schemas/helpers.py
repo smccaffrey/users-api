@@ -5,8 +5,5 @@ from users_api.models.users import User
 
 def post_response(post: PostsORM) -> Post:
     return Post.model_validate(
-        {
-            **post.__dict__,
-            "user": User.model_validate(post.users[0])
-        }
+        {**post.__dict__, "user": User.model_validate(post.users[0])}
     )

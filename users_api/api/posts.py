@@ -14,20 +14,14 @@ from users_api.managers.posts import posts_manager
 
 posts_router = UsersRouter()
 
+
 @posts_router.get("/")
-def get_posts(
-    db: Session = Depends(get_db)
-) -> PostsResponse:
+def get_posts(db: Session = Depends(get_db)) -> PostsResponse:
 
     posts: List[PostsORM] = posts_manager.get_all_posts(db)
-    
-    response_posts: List[Post] = [
-        post_response(
-            post=post
-        )
-        for post in posts
-    ]
-    
+
+    response_posts: List[Post] = [post_response(post=post) for post in posts]
+
     return PostsResponse(posts=response_posts)
 
 
@@ -36,44 +30,26 @@ def create_post(post_in: CreatePostRequest, db: Session = Depends(get_db)):
 
     created_post: PostsORM = posts_manager.create_post(db, post_in)
 
-    return post_response(
-        post=created_post
-    )
+    return post_response(post=created_post)
+
 
 @posts_router.get("/{post_id}")
-def get_post(
-    post_id: UUID,
-    db: Session = Depends(get_db)
-) -> Post:
-    post: PostsORM = posts_manager.get_post_by_id(
-        db_session=db,
-        post_id=post_id
-    )
-    return post_response(
-        post=post
-    )
+def get_post(post_id: UUID, db: Session = Depends(get_db)) -> Post:
+    post: PostsORM = posts_manager.get_post_by_id(db_session=db, post_id=post_id)
+    return post_response(post=post)
 
 
 @posts_router.put("/{post_id}")
 def update_post(
-    post_id: UUID, 
-    post_in: UpdatePostRequest,
-    db_session: Session = Depends(get_db)
+    post_id: UUID, post_in: UpdatePostRequest, db_session: Session = Depends(get_db)
 ) -> Post:
-    
+
     updated_post: PostsORM = posts_manager.update_post(
-        db_session=db_session,
-        post_id=post_id,
-        obj_in=post_in
+        db_session=db_session, post_id=post_id, obj_in=post_in
     )
-    return post_response(
-        post=updated_post
-    )
+    return post_response(post=updated_post)
 
 
 @posts_router.delete("/{post_id}", status_code=204)
-def delete_post(
-    post_id: str,
-    db_session: Session = Depends(get_db)
-):
+def delete_post(post_id: str, db_session: Session = Depends(get_db)):
     return posts_manager.delete_post(db_session, post_id)

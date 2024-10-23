@@ -1,5 +1,3 @@
-
-
 from typing import List, Optional
 from uuid import UUID
 from pydantic import BaseModel
@@ -27,6 +25,7 @@ class UpdatePostRequest(BaseModel):
     title: Optional[str] = None
     content: Optional[str] = None
     user_id: UUID
+
 
 class DeletePostResponse(BaseModel):
     status: str

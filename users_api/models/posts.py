@@ -13,9 +13,7 @@ class Post(BaseModel):
     content: Optional[str]
     created_at: Optional[datetime.datetime]
     last_updated: Optional[datetime.datetime]
-    
+
     user: User
 
-    model_config = {
-        "from_attributes": True
-    }
+    model_config = {"from_attributes": True}

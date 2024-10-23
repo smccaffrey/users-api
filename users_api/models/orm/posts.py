@@ -12,9 +12,4 @@ class PostsORM(Base):
     description = Column(String, nullable=True)
     content = Column(String, nullable=True)
 
-    users = relationship(
-        "UsersORM",
-        secondary=users_and_posts,
-        back_populates="posts"
-    )
-    
+    users = relationship("UsersORM", secondary=users_and_posts, back_populates="posts")

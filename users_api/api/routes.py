@@ -6,6 +6,7 @@ from users_api.api.posts import posts_router
 
 root_router = UsersRouter()
 
+
 @root_router.get("/health")
 @root_router.get("/")
 def health_check() -> int:
