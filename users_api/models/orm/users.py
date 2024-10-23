@@ -1,14 +1,8 @@
 from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
 from users_api.models.base import Base  # type: ignore
-
-# `id` uuid DEFAULT gen_random_uuid(),
-# `username` text DEFAULT NULL,
-# `name` text DEFAULT NULL,
-# `email` text DEFAULT NULL,
-# `sms` text DEFAULT NULL,
-# `created` timestamptz DEFAULT now(),
-# `lastseen` timestamptz DEFAULT NULL
+from users_api.models.orm.users_and_posts import users_and_posts
 
 class UsersORM(Base):
     __tablename__ = "users"
@@ -18,5 +12,8 @@ class UsersORM(Base):
     email = Column(String, nullable=True)
     sms = Column(String, nullable=True)
 
-    # def __repr__(self):
-    #     return f"<User {self.name} :: {self.email}>"
+    posts = relationship(
+        "PostsORM",
+        secondary=users_and_posts,
+        back_populates="users"
+    )

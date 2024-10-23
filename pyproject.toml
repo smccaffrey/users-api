@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ap-users-api"
+name = "users-api"
 version = "0.1.0"
 description = ""
 authors = ["Sam McCaffrey"]
