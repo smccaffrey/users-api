@@ -1,17 +1,19 @@
 import datetime
-from uuid import UUID
-
 from typing import Optional
+from uuid import UUID
 from pydantic import BaseModel
 
+from users_api.models.users import User
 
-class User(BaseModel):
-    id: Optional[UUID]
-    username: Optional[str]
-    name: Optional[str]
-    email: Optional[str]
-    sms: Optional[str]
+
+class Post(BaseModel):
+    id: UUID
+    title: str
+    description: Optional[str]
+    content: Optional[str]
     created_at: Optional[datetime.datetime]
     last_updated: Optional[datetime.datetime]
+
+    user: User
 
     model_config = {"from_attributes": True}
