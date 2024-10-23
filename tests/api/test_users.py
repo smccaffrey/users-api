@@ -6,9 +6,7 @@ from users_api.api.deps.db import get_db
 from users_api.app import app
 from users_api.models.orm.users import UsersORM
 
-TEST_AUTH_HEADERS = {
-    "Authorization": "Bearer test_token"
-} 
+TEST_AUTH_HEADERS = {"Authorization": "Bearer test_token"}
 
 
 # Mock database dependency
@@ -62,6 +60,7 @@ def test_post_user(client: TestClient) -> None:
 
     assert data["users"][0]["sms"] == "1234567890"
     assert data["users"][0]["email"] == "newuser@example.com"
+
 
 # TODO: skipping for now, cannot get it past a 500 error :(
 def skip_test_delete_user(client: TestClient, db_session: Session) -> None:

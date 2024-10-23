@@ -5,12 +5,11 @@ from users_api.models.orm.users import UsersORM
 
 from users_api.schemas.users import CreateUsersRequest
 
+
 class UsersManager(BaseManager[UsersORM]):
 
     def create_or_update(
-        self,
-        db_session: Session,
-        obj_in: CreateUsersRequest
+        self, db_session: Session, obj_in: CreateUsersRequest
     ) -> UsersORM:
 
         db_obj = (
@@ -32,8 +31,8 @@ class UsersManager(BaseManager[UsersORM]):
 
         else:
             db_obj = self.model(
-                email = obj_in.email,
-                sms = obj_in.sms,
+                email=obj_in.email,
+                sms=obj_in.sms,
             )
 
         db_session.add(db_obj)
