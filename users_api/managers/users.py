@@ -27,15 +27,11 @@ class UsersManager(BaseManager[UsersORM]):
             )
 
         if db_obj:
-            # db_obj.username = obj_in.user.username  # type: ignore
-            # db_obj.name = obj_in.user.name  # type: ignore
             db_obj.email = obj_in.email  # type: ignore
             db_obj.sms = obj_in.sms  # type: ignore
 
         else:
             db_obj = self.model(
-                # username = obj_in.user.username,
-                # name = obj_in.user.name,
                 email = obj_in.email,
                 sms = obj_in.sms,
             )

@@ -87,4 +87,4 @@ undo-alembic-migration:
 
 .PHONY: tests
 tests:
-	poetry run pytest tests/
+	poetry run pytest -s tests/
